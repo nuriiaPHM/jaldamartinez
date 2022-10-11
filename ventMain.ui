@@ -192,7 +192,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="cmbProcli">
+      <widget class="QComboBox" name="cmbProvCli">
        <property name="minimumSize">
         <size>
          <width>120</width>
