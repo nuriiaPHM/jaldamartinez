@@ -1,3 +1,4 @@
+import conexion
 from ventMain import *
 import var
 
@@ -68,9 +69,23 @@ class Clientes():
     def guardaCli(self = None):
         try:
             newcli = []
-            cliente = [var.ui.txtDni, var.ui.txtCar, var.ui.txtMarca, var.ui.txtModelo]
+            cliente = [var.ui.txtDni, var.ui.txtNombre, var.ui.txtFechaAltaCli, var.ui.txtDircli]
             for i in cliente:
                 newcli.append(i.text())
+            prov = var.ui.cmbProvCli.currentText()
+            newcli.append(prov)
+            muni = var.ui.cmbMuniCli.currentText()
+            newcli.append(muni)
+
+            print(newcli)
+
+
+
+
+
+
+
+            '''
             motor = Clientes.checkMotor()
             newcli.append(motor)
             row = 0
@@ -79,7 +94,8 @@ class Clientes():
             for registro in newcli:
                 cell = QtWidgets.QTableWidgetItem(registro)
                 var.ui.tabClientes.setItem(row, column, cell)
-                column += 1
+                column += 1'''
+
         except Exception as error:
             print('Error en guardaCli: ', error)
 
@@ -100,7 +116,7 @@ class Clientes():
             for i in var.ui.btnGroupPago.buttons():
                 i.setChecked(False)
 
-
+            conexion.Conexion.cargarProv()
 
         except Exception as error:
             print('Error limpiar cliente: ', error)
