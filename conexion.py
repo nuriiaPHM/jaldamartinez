@@ -26,3 +26,24 @@ class Conexion():
 
         except Exception as error:
             print('Error al cargar provincia: ', error)
+
+    def selMuni(self = None):
+        try:
+            id = 0
+            var.ui.cmbMuniCli.clear()
+            prov = var.ui.cmbProvCli.currentText()
+            query = QtSql.QSqlQuery()
+            query.prepare('select id from provincias where provincia = :prov')
+            query.bindValue(':prov', prov)
+            if query.exec():
+                while query.next():
+                    id = query.value(0)
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('select municipio from municipios where provincia_id = :id')
+            query1.bindValue(':id', int(id))
+            if query1.exec():
+                var.ui.cmbMuniCli.addItem('')
+                while query1.next():
+                    var.ui.cmbMuniCli.addItem(query1.value(0))
+        except Exception as error:
+            print("Error al cargar municipio: ", error)

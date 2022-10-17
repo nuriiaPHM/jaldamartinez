@@ -47,7 +47,10 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnLimpiarCli.clicked.connect(clientes.Clientes.limpiaCli)
         '''Llamadas de funciones'''
         conexion.Conexion.conexion()
+        '''Llamadas a eventos de combo box'''
         conexion.Conexion.cargarProv()
+        var.ui.cmbProvCli.currentIndexChanged.connect(conexion.Conexion.selMuni)
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()
