@@ -224,7 +224,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="cmbProcli_2">
+      <widget class="QComboBox" name="cmbMuniCli">
        <property name="minimumSize">
         <size>
          <width>180</width>

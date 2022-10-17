@@ -76,13 +76,7 @@ class Clientes():
             newcli.append(prov)
             muni = var.ui.cmbMuniCli.currentText()
             newcli.append(muni)
-
             print(newcli)
-
-
-
-
-
 
 
             '''
@@ -94,7 +88,8 @@ class Clientes():
             for registro in newcli:
                 cell = QtWidgets.QTableWidgetItem(registro)
                 var.ui.tabClientes.setItem(row, column, cell)
-                column += 1'''
+                column += 1
+            '''
 
         except Exception as error:
             print('Error en guardaCli: ', error)
