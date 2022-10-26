@@ -2,6 +2,7 @@ import conexion
 from ventMain import *
 import var
 
+
 class Clientes():
     def validarDni(dni):
         '''
@@ -26,7 +27,7 @@ class Clientes():
         except Exception as error:
             print('Error al validar DNI', error)
 
-    def mostraValidoDni(self = None):
+    def mostraValidoDni(self=None):
         try:
             dni = var.ui.txtDni.text()
             if Clientes.validarDni(dni):
@@ -42,7 +43,7 @@ class Clientes():
         except Exception as error:
             print('Error mostrar marcado validez DNI: ', error)
 
-    def selMotor(self = None):
+    def selMotor(self=None):
         try:
             var.motor = (var.ui.rbtGasolina, var.ui.rbtDiesel, var.ui.rbtHibrido, var.ui.rbtElectrico)
             for i in var.motor:
@@ -50,7 +51,7 @@ class Clientes():
         except Exception as error:
             print('Error seleccion motor: ', error)
 
-    def checkMotor(self = None):
+    def checkMotor(self=None):
         try:
             if var.ui.rbtGasolina.isChecked():
                 motor = 'Gasolina'
@@ -66,30 +67,43 @@ class Clientes():
         except Exception as error:
             print('Error check motor: ', error)
 
-    def guardaCli(self = None):
+    def guardaCli(self=None):
         try:
             newcli = []
+            newcar = []
+            pagos = []
+
             cliente = [var.ui.txtDni, var.ui.txtNombre, var.ui.txtFechaAltaCli, var.ui.txtDircli]
+            car = [var.ui.txtCar, var.ui.txtMarca, var.ui.txtModelo]
+
             for i in cliente:
                 newcli.append(i.text())
+            for i in car:
+                newcar.append(i.text())
+
             prov = var.ui.cmbProvCli.currentText()
-            newcli.append(prov)
             muni = var.ui.cmbMuniCli.currentText()
-            newcli.append(muni)
-            print(newcli)
-
-
-            '''
             motor = Clientes.checkMotor()
-            newcli.append(motor)
-            row = 0
-            column = 0
-            var.ui.tabClientes.insertRow(row)
-            for registro in newcli:
-                cell = QtWidgets.QTableWidgetItem(registro)
-                var.ui.tabClientes.setItem(row, column, cell)
-                column += 1
-            '''
+
+            newcli.append(prov)
+            newcli.append(muni)
+            newcar.append(motor)
+
+            if var.ui.chkTarjeta.isChecked():
+                pagos.append('Tarjeta')
+
+            if var.ui.chkEfectivo.isChecked():
+                pagos.append('Efectivo')
+
+            if var.ui.chkTransferencia.isChecked():
+                pagos.append('Transeferencia')
+
+            pagos = set(pagos)  # evita duplicados
+            newcli.append('; '.join(pagos))
+
+            conexion.Conexion.altaCli(newcli,newcar)
+            print(newcli)
+            print(newcar)
 
         except Exception as error:
             print('Error en guardaCli: ', error)
@@ -102,9 +116,10 @@ class Clientes():
         except Exception as error:
             print('Error en cargar fecha: ', error)
 
-    def limpiaCli(self = None):
+    def limpiaCli(self=None):
         try:
-            cliente = [var.ui.txtDni, var.ui.txtNombre, var.ui.txtFechaAltaCli, var.ui.txtDircli, var.ui.txtCar, var.ui.txtMarca, var.ui.txtModelo]
+            cliente = [var.ui.txtDni, var.ui.txtNombre, var.ui.txtFechaAltaCli, var.ui.txtDircli, var.ui.txtCar,
+                       var.ui.txtMarca, var.ui.txtModelo]
             for i in cliente:
                 i.setText('')
 
@@ -115,4 +130,3 @@ class Clientes():
 
         except Exception as error:
             print('Error limpiar cliente: ', error)
-

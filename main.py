@@ -4,6 +4,10 @@ from dlgCalendar import *
 from datetime import *
 import sys, var, events, clientes, conexion
 
+class FileDialogAbrir(QtWidgets.QFileDialog):
+    def __init__(self):
+        super(FileDialogAbrir, self).__init__()
+
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):
         super(DialogCalendar, self).__init__()
@@ -28,10 +32,12 @@ class Main(QtWidgets.QMainWindow):
         var.ui.setupUi(self)
         var.avisosalir = DialogSalir()
         var.dlgcalendar = DialogCalendar()
+        var.dlgabrir = FileDialogAbrir()
 
         ''' Listado de eventos de menu '''
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.actionSalirBar.triggered.connect(events.Eventos.Salir)
+        var.ui.actionCrear_copia_de_seguridad.triggered.connect(events.Eventos.creaBackUp)
 
         ''' Listado de eventos de cajas '''
         var.ui.txtDni.editingFinished.connect(clientes.Clientes.mostraValidoDni)
@@ -50,6 +56,10 @@ class Main(QtWidgets.QMainWindow):
         '''Llamadas a eventos de combo box'''
         conexion.Conexion.cargarProv()
         var.ui.cmbProvCli.currentIndexChanged.connect(conexion.Conexion.selMuni)
+
+
+        conexion.Conexion.mostrarTabCarCli(self)
+        events.Eventos.resizeTabCarCli(self)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])

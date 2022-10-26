@@ -1,4 +1,7 @@
-import sys, var
+import sys, var, shutil, os
+import zipfile
+from datetime import date, datetime
+from ventMain import *
 
 class Eventos:
     def Salir(self):
@@ -27,3 +30,40 @@ class Eventos:
 
         except Exception as error:
             print('Error en letras capital: ', error)
+
+    def resizeTabCarCli(self):
+        try:
+            header = var.ui.tabClientes.horizontalHeader()
+            for i in range(5):
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
+                if i == 0 or i == 1:
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
+
+        except Exception as error:
+            print('Error en resize')
+
+    def creaBackUp(self):
+        try:
+            #var.dlgabrir.show()
+
+            fecha = datetime.today()
+            fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
+            copia = (str(fecha)+'_backup.zip')
+
+            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Guardar copia', copia, '.zip')
+
+            if var.dlgabrir.accept and filename != '':
+                fichzip = zipfile.ZipFile(copia, 'w')
+                fichzip.write(var.bbdd, os.path.basename(var.bbdd), zipfile.ZIP_DEFLATED)
+                fichzip.close()
+                shutil.move(str(copia), str(directorio))
+
+                msg = QtWidgets.QMessageBox()
+                msg.setModal(True)
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                msg.setText('Copia de seguridad creada')
+                msg.exec()
+
+        except Exception as error:
+            print('Error en crear backup: ', error)

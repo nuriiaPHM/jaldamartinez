@@ -6,4 +6,5 @@ global ui
 global motor
 global avisosalir
 global dlgcalendar
-filedb = 'bbdd.sqlite'
+global dlgabrir
+global bbdd
