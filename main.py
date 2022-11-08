@@ -37,7 +37,10 @@ class Main(QtWidgets.QMainWindow):
         ''' Listado de eventos de menu '''
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.actionSalirBar.triggered.connect(events.Eventos.Salir)
-        var.ui.actionCrear_copia_de_seguridad.triggered.connect(events.Eventos.creaBackUp)
+        var.ui.actionCrear_copia_de_seguridad.triggered.connect(events.Eventos.creaBackup)
+        var.ui.actionRestaurar_copia_de_seguridad.triggered.connect(events.Eventos.restauraBackup)
+        var.ui.actionCrear_copia_de_seguridadBar.triggered.connect(events.Eventos.creaBackup)
+        var.ui.actionRestaurar_copia_de_seguridadBar.triggered.connect(events.Eventos.restauraBackup)
 
         ''' Listado de eventos de cajas '''
         var.ui.txtDni.editingFinished.connect(clientes.Clientes.mostraValidoDni)

@@ -100,7 +100,7 @@ class Conexion():
         except Exception as error:
             print('Error en alta cliente: ', error)
 
-    def mostrarTabCarCli(self):
+    def mostrarTabCarCli(self=None):
         try:
             index = 0
             query = QtSql.QSqlQuery()

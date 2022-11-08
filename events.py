@@ -1,6 +1,8 @@
 import sys, var, shutil, os
 import zipfile
 from datetime import date, datetime
+
+import conexion
 from ventMain import *
 
 class Eventos:
@@ -42,7 +44,7 @@ class Eventos:
         except Exception as error:
             print('Error en resize')
 
-    def creaBackUp(self):
+    def creaBackup(self):
         try:
             #var.dlgabrir.show()
 
@@ -67,3 +69,26 @@ class Eventos:
 
         except Exception as error:
             print('Error en crear backup: ', error)
+
+    def restauraBackup(self):
+        try:
+            filename = var.dlgabrir.getOpenFileName(None,'Restaurar Copia Seguridad', '', '*.zip;;All Files (*)')
+
+            if var.dlgabrir.accept and filename != '':
+                file = filename[0]
+                with zipfile.ZipFile(str(file), 'r') as bbdd:
+                    bbdd.extractall(pwd=None)
+                bbdd.close()
+
+            conexion.Conexion.conexion()
+            conexion.Conexion.mostrarTabCarCli()
+
+            msg = QtWidgets.QMessageBox()
+            msg.setModal(True)
+            msg.setWindowTitle('Aviso')
+            msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+            msg.setText('Copia de seguridad restaurada')
+            msg.exec()
+
+        except Exception as error:
+            print('Error en restaurar backup: ', error)
