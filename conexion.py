@@ -120,6 +120,8 @@ class Conexion():
                     var.ui.tabClientes.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                     var.ui.tabClientes.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
+                    var.ui.tabClientes.setStyleSheet("QTableView::item:alternate { background-color: #f3eeed; } QTableView::item { background-color: #d1c8c6; }")
+
                     index += 1
 
         except Exception as error:
