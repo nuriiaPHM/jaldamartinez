@@ -7,4 +7,5 @@ global motor
 global avisosalir
 global dlgcalendar
 global dlgabrir
+global dlgexportar
 global bbdd

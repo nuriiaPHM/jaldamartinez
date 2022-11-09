@@ -318,7 +318,8 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>img/limpiar_icon.png</normaloff>img/limpiar_icon.png</iconset>
+        <normaloff>C:/Users/a21nuriajm/.designer/backup/img/limpiar_icon.png</normaloff>
+        <normalon>img/limpiar_icon.png</normalon>C:/Users/a21nuriajm/.designer/backup/img/limpiar_icon.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -938,7 +939,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>img/calendar-icon.png</normaloff>img/calendar-icon.png</iconset>
+           <normaloff>C:/Users/a21nuriajm/.designer/backup/img/calendar-icon.png</normaloff>
+           <normalon>img/calendar-icon.png</normalon>C:/Users/a21nuriajm/.designer/backup/img/calendar-icon.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -976,7 +978,8 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>img/lupa_icon.png</normaloff>img/lupa_icon.png</iconset>
+        <normaloff>C:/Users/a21nuriajm/.designer/backup/img/lupa_icon.png</normaloff>
+        <normalon>img/lupa_icon.png</normalon>C:/Users/a21nuriajm/.designer/backup/img/lupa_icon.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -1019,6 +1022,8 @@
     </property>
     <addaction name="actionCrear_copia_de_seguridad"/>
     <addaction name="actionRestaurar_copia_de_seguridad"/>
+    <addaction name="separator"/>
+    <addaction name="actionExportar_datos"/>
    </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuHerramientas"/>
@@ -1035,6 +1040,9 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionSalirBar"/>
+   <addaction name="separator"/>
+   <addaction name="actionCrear_copia_de_seguridadBar"/>
+   <addaction name="actionRestaurar_copia_de_seguridadBar"/>
   </widget>
   <action name="actionSalir">
    <property name="text">
@@ -1047,7 +1055,8 @@
   <action name="actionSalirBar">
    <property name="icon">
     <iconset>
-     <normaloff>img/salir_icon.png</normaloff>img/salir_icon.png</iconset>
+     <normaloff>C:/Users/a21nuriajm/.designer/backup/img/salir_icon.png</normaloff>
+     <normalon>img/salir_icon.png</normalon>C:/Users/a21nuriajm/.designer/backup/img/salir_icon.png</iconset>
    </property>
    <property name="text">
     <string>Salir</string>
@@ -1061,9 +1070,43 @@
     <string>Crear copia de seguridad</string>
    </property>
   </action>
+  <action name="actionCrear_copia_de_seguridadBar">
+   <property name="icon">
+    <iconset>
+     <normaloff>C:/Users/a21nuriajm/.designer/backup/img/crearbd-icon.png</normaloff>
+     <normalon>img/crearbd-icon.png</normalon>C:/Users/a21nuriajm/.designer/backup/img/crearbd-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Crear copia de seguridad</string>
+   </property>
+   <property name="toolTip">
+    <string>Crear copia de seguridad</string>
+   </property>
+  </action>
+  <action name="actionRestaurar_copia_de_seguridadBar">
+   <property name="icon">
+    <iconset>
+     <normaloff>C:/Users/a21nuriajm/.designer/backup/img/restaurabd-icon.png</normaloff>
+     <normalon>img/restaurabd-icon.png</normalon>C:/Users/a21nuriajm/.designer/backup/img/restaurabd-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Restaurar copia de seguridad</string>
+   </property>
+   <property name="toolTip">
+    <string>Restaurar copia de seguridad</string>
+   </property>
+  </action>
   <action name="actionRestaurar_copia_de_seguridad">
    <property name="text">
     <string>Restaurar copia de seguridad</string>
+   </property>
+  </action>
+  <action name="actionExportar_datos">
+   <property name="text">
+    <string>Exportar datos</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+E</string>
    </property>
   </action>
  </widget>
