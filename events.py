@@ -2,6 +2,7 @@ import sys, var, shutil, os, xlwt, zipfile
 from datetime import date, datetime
 from PyQt6 import QtSql
 import conexion
+import events
 from ventMain import *
 from dlgExportar import *
 
@@ -23,9 +24,11 @@ class Eventos:
         except Exception as error:
             print('Error abrir calendario: ', error)
 
-    def abrirExportar(self):
+    def abrirExportar(self=None):
         try:
             var.dlgexportar.show()
+
+            events.Eventos.exportarDatos(self)
         except Exception as error:
             print('Error abrir exportar: ', error)
 
@@ -100,22 +103,17 @@ class Eventos:
         except Exception as error:
             print('Error en restaurar backup: ', error)
 
-    def exportarDatos(self):
+    def exportarDatos(self=None):
         try:
             clientes = False
             coches = False
 
             var.dlgexportar.show()
-
             if var.dlgexportar.exec():
                 if var.ui.cbClientes.isChecked():
                     clientes = True
                 if var.ui.cbCoches.isChecked():
                     coches = True
-            else:
-                var.dlgexportar.hide()
-
-
 
 
             fecha = datetime.today()
@@ -162,7 +160,6 @@ class Eventos:
                 sheet1.write(0, 1, 'Marca')
                 sheet1.write(0, 2, 'Modelo')
                 sheet1.write(0, 3, 'Motor')
-
 
 
             queryCli = QtSql.QSqlQuery()

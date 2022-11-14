@@ -10,6 +10,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 
 
 class Ui_ventMain(object):
+
     def setupUi(self, ventMain):
         ventMain.setObjectName("ventMain")
         ventMain.resize(800, 680)

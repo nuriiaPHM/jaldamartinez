@@ -9,17 +9,17 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_dlgExportar(object):
-    def setupUi(self, dlgExportar):
-        dlgExportar.setObjectName("dlgExportar")
-        dlgExportar.resize(260, 130)
-        dlgExportar.setMinimumSize(QtCore.QSize(260, 130))
-        dlgExportar.setMaximumSize(QtCore.QSize(260, 130))
-        self.label = QtWidgets.QLabel(dlgExportar)
-        self.label.setGeometry(QtCore.QRect(30, 20, 151, 21))
-        self.label.setObjectName("label")
-        self.layoutWidget_4 = QtWidgets.QWidget(dlgExportar)
-        self.layoutWidget_4.setGeometry(QtCore.QRect(30, 50, 179, 22))
+class Ui_dlgexportar(object):
+    def setupUi(self, dlgexportar):
+        dlgexportar.setObjectName("dlgexportar")
+        dlgexportar.resize(308, 151)
+        self.buttonBox = QtWidgets.QDialogButtonBox(dlgexportar)
+        self.buttonBox.setGeometry(QtCore.QRect(40, 100, 221, 32))
+        self.buttonBox.setOrientation(QtCore.Qt.Orientation.Horizontal)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.buttonBox.setObjectName("buttonBox")
+        self.layoutWidget_4 = QtWidgets.QWidget(dlgexportar)
+        self.layoutWidget_4.setGeometry(QtCore.QRect(50, 60, 179, 22))
         self.layoutWidget_4.setObjectName("layoutWidget_4")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.layoutWidget_4)
         self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
@@ -34,17 +34,18 @@ class Ui_dlgExportar(object):
         self.cbCoches.setMaximumSize(QtCore.QSize(80, 20))
         self.cbCoches.setObjectName("cbCoches")
         self.horizontalLayout_6.addWidget(self.cbCoches)
-        self.btnAceptar = QtWidgets.QPushButton(dlgExportar)
-        self.btnAceptar.setGeometry(QtCore.QRect(150, 90, 75, 23))
-        self.btnAceptar.setObjectName("btnAceptar")
+        self.label = QtWidgets.QLabel(dlgexportar)
+        self.label.setGeometry(QtCore.QRect(50, 20, 151, 21))
+        self.label.setObjectName("label")
 
-        self.retranslateUi(dlgExportar)
-        QtCore.QMetaObject.connectSlotsByName(dlgExportar)
+        self.retranslateUi(dlgexportar)
+        self.buttonBox.accepted.connect(dlgexportar.accept) # type: ignore
+        self.buttonBox.rejected.connect(dlgexportar.reject) # type: ignore
+        QtCore.QMetaObject.connectSlotsByName(dlgexportar)
 
-    def retranslateUi(self, dlgExportar):
+    def retranslateUi(self, dlgexportar):
         _translate = QtCore.QCoreApplication.translate
-        dlgExportar.setWindowTitle(_translate("dlgExportar", "Dialog"))
-        self.label.setText(_translate("dlgExportar", "¿Qué datos quiere exportar?"))
-        self.cbClientes.setText(_translate("dlgExportar", "Clientes"))
-        self.cbCoches.setText(_translate("dlgExportar", "Coches"))
-        self.btnAceptar.setText(_translate("dlgExportar", "Aceptar"))
+        dlgexportar.setWindowTitle(_translate("dlgexportar", "Dialog"))
+        self.cbClientes.setText(_translate("dlgexportar", "Clientes"))
+        self.cbCoches.setText(_translate("dlgexportar", "Coches"))
+        self.label.setText(_translate("dlgexportar", "¿Qué datos quiere exportar?"))

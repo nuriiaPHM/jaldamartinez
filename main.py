@@ -1,7 +1,7 @@
-from dlgExportar import *
 from ventMain import *
 from dlgSalir import *
 from dlgCalendar import *
+from dlgExportar import *
 from datetime import *
 import sys, var, events, clientes, conexion
 
@@ -63,8 +63,10 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnGuardaCli.clicked.connect(clientes.Clientes.guardaCli)
         var.ui.btnFechaAltaCli.clicked.connect(events.Eventos.abrirCalendar)
         var.ui.btnLimpiarCli.clicked.connect(clientes.Clientes.limpiaCli)
+
         '''Llamadas de funciones'''
         conexion.Conexion.conexion()
+
         '''Llamadas a eventos de combo box'''
         conexion.Conexion.cargarProv()
         var.ui.cmbProvCli.currentIndexChanged.connect(conexion.Conexion.selMuni)
