@@ -1,3 +1,4 @@
+import clientes
 import conexion
 from ventMain import *
 import var
@@ -101,7 +102,7 @@ class Clientes():
             pagos = set(pagos)  # evita duplicados
             newcli.append('; '.join(pagos))
 
-            conexion.Conexion.altaCli(newcli,newcar)
+            conexion.Conexion.altaCli(newcli, newcar)
             print(newcli)
             print(newcar)
 
@@ -123,10 +124,51 @@ class Clientes():
             for i in cliente:
                 i.setText('')
 
-            for i in var.ui.btnGroupPago.buttons():
+            var.ui.cmbProvCli.setCurrentText('')
+            var.ui.cmbMuniCli.setCurrentText('')
+
+            checks = [var.ui.chkTarjeta, var.ui.chkEfectivo, var.ui.chkTransferencia]
+            for i in checks:
                 i.setChecked(False)
 
-            conexion.Conexion.cargarProv()
 
         except Exception as error:
             print('Error limpiar cliente: ', error)
+
+    def cargaCliente(self=None):
+        try:
+            Clientes.limpiaCli()
+            fila = var.ui.tabClientes.selectedItems()
+            datos = [var.ui.txtDni, var.ui.txtCar, var.ui.txtMarca, var.ui.txtModelo]
+            row = [dato.text() for dato in fila]
+
+            for i, dato in enumerate(datos):
+                dato.setText(row[i])
+
+            if row[4] == 'Gasolina':
+                var.ui.rbtGasolina.setChecked(True)
+            elif row[4] == 'Diesel':
+                var.ui.rbtDiesel.setChecked(True)
+            elif row[4] == 'Hibrido':
+                var.ui.rbtHibrido.setChecked(True)
+            elif row[4] == 'Electrico':
+                var.ui.rbtElectrico.setChecked(True)
+
+            registro = conexion.Conexion.oneCli(row[0])
+
+            var.ui.txtNombre.setText(registro[0])
+            var.ui.txtFechaAltaCli.setText(registro[1])
+            var.ui.txtDircli.setText(registro[2])
+            var.ui.cmbProvCli.setCurrentText(registro[3])
+            var.ui.cmbMuniCli.setCurrentText(registro[4])
+
+            if 'Efectivo' in registro[5]:
+                var.ui.chkEfectivo.setChecked(True)
+            if 'Tarjeta' in registro[5]:
+                var.ui.chkTarjeta.setChecked(True)
+            if 'Transferencia' in registro[5]:
+                var.ui.chkTransferencia.setChecked(True)
+
+
+        except Exception as error:
+            print('Error al cargar cliente: ', error)

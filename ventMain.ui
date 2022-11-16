@@ -457,6 +457,9 @@
         <height>280</height>
        </size>
       </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
       <column>
        <property name="text">
         <string>DNI</string>
@@ -1039,10 +1042,10 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionSalirBar"/>
-   <addaction name="separator"/>
    <addaction name="actionCrear_copia_de_seguridadBar"/>
    <addaction name="actionRestaurar_copia_de_seguridadBar"/>
+   <addaction name="separator"/>
+   <addaction name="actionSalirBar"/>
   </widget>
   <action name="actionSalir">
    <property name="text">
@@ -1086,8 +1089,8 @@
   <action name="actionRestaurar_copia_de_seguridadBar">
    <property name="icon">
     <iconset>
-     <normaloff>C:/Users/a21nuriajm/.designer/backup/img/restaurabd-icon.png</normaloff>
-     <normalon>img/restaurabd-icon.png</normalon>C:/Users/a21nuriajm/.designer/backup/img/restaurabd-icon.png</iconset>
+     <normaloff>img/restaurabd-icon.png</normaloff>
+     <normalon>img/restaurabd-icon.png</normalon>img/restaurabd-icon.png</iconset>
    </property>
    <property name="text">
     <string>Restaurar copia de seguridad</string>

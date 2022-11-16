@@ -103,6 +103,7 @@ class Eventos:
         except Exception as error:
             print('Error en restaurar backup: ', error)
 
+    '''
     def exportarDatos(self=None):
         try:
             clientes = False
@@ -225,4 +226,4 @@ class Eventos:
             msg.exec()
 
         except Exception as error:
-            print('Error al exportar datos: ', error)
+            print('Error al exportar datos: ', error)'''

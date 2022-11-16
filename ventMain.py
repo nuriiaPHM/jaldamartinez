@@ -10,7 +10,6 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 
 
 class Ui_ventMain(object):
-
     def setupUi(self, ventMain):
         ventMain.setObjectName("ventMain")
         ventMain.resize(800, 680)
@@ -159,6 +158,7 @@ class Ui_ventMain(object):
         self.tabClientes.setGeometry(QtCore.QRect(0, 290, 795, 280))
         self.tabClientes.setMinimumSize(QtCore.QSize(795, 280))
         self.tabClientes.setMaximumSize(QtCore.QSize(795, 280))
+        self.tabClientes.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
         self.tabClientes.setObjectName("tabClientes")
         self.tabClientes.setColumnCount(5)
         self.tabClientes.setRowCount(0)
@@ -390,7 +390,7 @@ class Ui_ventMain(object):
         self.actionCrear_copia_de_seguridadBar.setObjectName("actionCrear_copia_de_seguridadBar")
         self.actionRestaurar_copia_de_seguridadBar = QtGui.QAction(ventMain)
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("C:/Users/a21nuriajm/.designer/backup/img/restaurabd-icon.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon5.addPixmap(QtGui.QPixmap("img/restaurabd-icon.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         icon5.addPixmap(QtGui.QPixmap("img/restaurabd-icon.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.On)
         self.actionRestaurar_copia_de_seguridadBar.setIcon(icon5)
         self.actionRestaurar_copia_de_seguridadBar.setObjectName("actionRestaurar_copia_de_seguridadBar")
@@ -405,10 +405,10 @@ class Ui_ventMain(object):
         self.menuHerramientas.addAction(self.actionExportar_datos)
         self.menubar.addAction(self.menuArchivo.menuAction())
         self.menubar.addAction(self.menuHerramientas.menuAction())
-        self.toolBar.addAction(self.actionSalirBar)
-        self.toolBar.addSeparator()
         self.toolBar.addAction(self.actionCrear_copia_de_seguridadBar)
         self.toolBar.addAction(self.actionRestaurar_copia_de_seguridadBar)
+        self.toolBar.addSeparator()
+        self.toolBar.addAction(self.actionSalirBar)
 
         self.retranslateUi(ventMain)
         self.tabWidget.setCurrentIndex(0)

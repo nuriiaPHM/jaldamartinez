@@ -1,48 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>dlgExportar</class>
- <widget class="QDialog" name="dlgExportar">
+ <class>dlgexportar</class>
+ <widget class="QDialog" name="dlgexportar">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>260</width>
-    <height>130</height>
+    <width>308</width>
+    <height>151</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>260</width>
-    <height>130</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>260</width>
-    <height>130</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>20</y>
-     <width>151</width>
-     <height>21</height>
+     <x>40</x>
+     <y>100</y>
+     <width>221</width>
+     <height>32</height>
     </rect>
    </property>
-   <property name="text">
-    <string>¿Qué datos quiere exportar?</string>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget_4">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>50</y>
+     <x>50</x>
+     <y>60</y>
      <width>179</width>
      <height>22</height>
     </rect>
@@ -88,20 +79,53 @@
     </item>
    </layout>
   </widget>
-  <widget class="QPushButton" name="btnAceptar">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>90</y>
-     <width>75</width>
-     <height>23</height>
+     <x>50</x>
+     <y>20</y>
+     <width>151</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>Aceptar</string>
+    <string>¿Qué datos quiere exportar?</string>
    </property>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>dlgexportar</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>dlgexportar</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -120,14 +120,28 @@ class Conexion():
                     var.ui.tabClientes.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                     var.ui.tabClientes.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
-
                     if (index % 2) == 0:
-                        var.ui.tabClientes.setStyleSheet("QTableView::item:alternate { background-color: #f3eeed; }")
-                    else:
                         var.ui.tabClientes.setStyleSheet("QTableView::item { background-color: #d1c8c6; }")
-
+                    else:
+                        var.ui.tabClientes.setStyleSheet("QTableView::item { background-color: #f3eeed; }")
 
                     index += 1
 
         except Exception as error:
             print('Error al mostrar tabla coches clientes: ', error)
+
+    def oneCli(dni):
+        try:
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select nombre, alta, direccion, provincia, municipio, pago from clientes where dni = :dni')
+
+            query.bindValue(':dni', str(dni))
+            if query.exec():
+                while query.next():
+                    for i in range(6):
+                        registro.append(query.value(i))
+            return registro
+
+        except Exception as error:
+            print('Error en oneCli: ', error)
