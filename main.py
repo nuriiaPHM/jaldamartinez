@@ -25,13 +25,13 @@ class DialogSalir(QtWidgets.QDialog):
         super(DialogSalir, self).__init__()
         var.avisosalir = Ui_dlgSalir()
         var.avisosalir.setupUi(self)
-'''
+
 class DialogExportar(QtWidgets.QDialog):
     def __init__(self):
         super(DialogExportar, self).__init__()
-        var.dlgexportar = Ui_dlgExportar()
+        var.dlgexportar = Ui_dlgexportar()
         var.dlgexportar.setupUi(self)
-'''
+
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
         super(Main, self).__init__()
@@ -40,7 +40,7 @@ class Main(QtWidgets.QMainWindow):
         var.avisosalir = DialogSalir()
         var.dlgcalendar = DialogCalendar()
         var.dlgabrir = FileDialogAbrir()
-        #var.dlgexportar = DialogExportar()
+        var.dlgexportar = DialogExportar()
 
         ''' Listado de eventos de menu '''
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
@@ -49,7 +49,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionRestaurar_copia_de_seguridad.triggered.connect(events.Eventos.restauraBackup)
         var.ui.actionCrear_copia_de_seguridadBar.triggered.connect(events.Eventos.creaBackup)
         var.ui.actionRestaurar_copia_de_seguridadBar.triggered.connect(events.Eventos.restauraBackup)
-        #var.ui.actionExportar_datos.triggered.connect(events.Eventos.exportarDatos)
+        var.ui.actionExportar_datos.triggered.connect(events.Eventos.abrirExportar)
+        var.ui.actionImportar_datos.triggered.connect(events.Eventos.importarDatos)
 
         ''' Listado de eventos de cajas '''
         var.ui.txtDni.editingFinished.connect(clientes.Clientes.mostraValidoDni)

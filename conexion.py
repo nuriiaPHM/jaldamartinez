@@ -100,6 +100,27 @@ class Conexion():
         except Exception as error:
             print('Error en alta cliente: ', error)
 
+    def altaExcelCoche(new):
+        try:
+
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('insert into coches(matricula, dnicli, marca, modelo, motor) '
+                           'values (:matricula, :dnicli, :marca, :modelo, :motor)')
+
+            query1.bindValue(':matricula', str(new[0]))
+            query1.bindValue(':dnicli', str(new[1]))
+            query1.bindValue(':marca', str(new[2]))
+            query1.bindValue(':modelo', str(new[3]))
+            query1.bindValue(':motor', str(new[4]))
+
+            if query1.exec():
+                pass
+
+            conexion.Conexion.mostrarTabCarCli(None)
+
+        except Exception as error:
+            print('Error en alta excel coche: ', error)
+
     def mostrarTabCarCli(self=None):
         try:
             index = 0
