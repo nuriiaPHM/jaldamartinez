@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'dlgExportar.ui'
+# Form implementation generated from reading ui file 'dlgImportar.ui'
 #
 # Created by: PyQt6 UI code generator 6.3.1
 #
@@ -9,12 +9,14 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_dlgexportar(object):
-    def setupUi(self, dlgexportar):
-        dlgexportar.setObjectName("dlgexportar")
-        dlgexportar.resize(275, 151)
-        dlgexportar.setModal(True)
-        self.layoutWidget_4 = QtWidgets.QWidget(dlgexportar)
+class Ui_dlgimportar(object):
+    def setupUi(self, dlgimportar):
+        dlgimportar.setObjectName("dlgimportar")
+        dlgimportar.resize(279, 150)
+        self.btnAceptar = QtWidgets.QPushButton(dlgimportar)
+        self.btnAceptar.setGeometry(QtCore.QRect(100, 100, 75, 23))
+        self.btnAceptar.setObjectName("btnAceptar")
+        self.layoutWidget_4 = QtWidgets.QWidget(dlgimportar)
         self.layoutWidget_4.setGeometry(QtCore.QRect(60, 60, 161, 22))
         self.layoutWidget_4.setObjectName("layoutWidget_4")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.layoutWidget_4)
@@ -30,22 +32,19 @@ class Ui_dlgexportar(object):
         self.cbCoches.setMaximumSize(QtCore.QSize(11111, 20))
         self.cbCoches.setObjectName("cbCoches")
         self.horizontalLayout_6.addWidget(self.cbCoches)
-        self.label = QtWidgets.QLabel(dlgexportar)
+        self.label = QtWidgets.QLabel(dlgimportar)
         self.label.setGeometry(QtCore.QRect(60, 30, 141, 21))
         self.label.setMinimumSize(QtCore.QSize(141, 21))
         self.label.setMaximumSize(QtCore.QSize(141, 21))
         self.label.setObjectName("label")
-        self.btnAceptar = QtWidgets.QPushButton(dlgexportar)
-        self.btnAceptar.setGeometry(QtCore.QRect(100, 100, 75, 23))
-        self.btnAceptar.setObjectName("btnAceptar")
 
-        self.retranslateUi(dlgexportar)
-        QtCore.QMetaObject.connectSlotsByName(dlgexportar)
+        self.retranslateUi(dlgimportar)
+        QtCore.QMetaObject.connectSlotsByName(dlgimportar)
 
-    def retranslateUi(self, dlgexportar):
+    def retranslateUi(self, dlgimportar):
         _translate = QtCore.QCoreApplication.translate
-        dlgexportar.setWindowTitle(_translate("dlgexportar", "Exportar Datos"))
-        self.cbClientes.setText(_translate("dlgexportar", "Clientes"))
-        self.cbCoches.setText(_translate("dlgexportar", "Coches"))
-        self.label.setText(_translate("dlgexportar", "¿Qué datos quiere exportar?"))
-        self.btnAceptar.setText(_translate("dlgexportar", "Aceptar"))
+        dlgimportar.setWindowTitle(_translate("dlgimportar", "Importar Datos"))
+        self.btnAceptar.setText(_translate("dlgimportar", "Aceptar"))
+        self.cbClientes.setText(_translate("dlgimportar", "Clientes"))
+        self.cbCoches.setText(_translate("dlgimportar", "Coches"))
+        self.label.setText(_translate("dlgimportar", "¿Qué datos quiere importar?"))

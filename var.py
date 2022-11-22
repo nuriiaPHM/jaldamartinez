@@ -8,4 +8,5 @@ global avisosalir
 global dlgcalendar
 global dlgabrir
 global dlgexportar
+global dlgimportar
 global bbdd

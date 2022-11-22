@@ -5,6 +5,8 @@ from PyQt6 import QtSql
 import clientes
 import conexion
 from dlgExportar import *
+from dlgImportar import *
+from ventMain import *
 
 
 class Eventos:
@@ -24,13 +26,6 @@ class Eventos:
         except Exception as error:
             print('Error abrir calendario: ', error)
 
-    def abrirExportar(self=None):
-        try:
-            var.dlgexportar.show()
-
-            events.Eventos.exportarDatos(self)
-        except Exception as error:
-            print('Error abrir exportar: ', error)
 
     def letrasCapital(self=None):
         try:
@@ -103,6 +98,15 @@ class Eventos:
         except Exception as error:
             print('Error en restaurar backup: ', error)
 
+    def abrirImportar(self=None):
+        try:
+            var.dlgimportar.show()
+            if var.dlgimportar.exec():
+                pass
+
+        except Exception as error:
+            print('Error en abrir exportar: ', error)
+
     def importarDatos(self):
         try:
             filename = var.dlgabrir.getOpenFileName(None, 'Importar datos', '', '*.xls;;All Files (*)')
@@ -123,8 +127,14 @@ class Eventos:
                         new = []
                         for j in range(columnas):
                             new.append(str(datos.cell_value(i,j)))
+                        if clientes.Clientes.validarDni(str(new[0])):
+                            if var.dlgimportar.cbClientes.isChecked():
+                                conexion.Conexion.altaExcelCli(new)
+
                         if clientes.Clientes.validarDni(str(new[1])):
-                            conexion.Conexion.altaExcelCoche(new)
+                            if var.dlgimportar.cbCoches.isChecked():
+                                conexion.Conexion.altaExcelCoche(new)
+
                 conexion.Conexion.mostrarTabCarCli()
 
                 msg = QtWidgets.QMessageBox()
@@ -134,30 +144,22 @@ class Eventos:
                 msg.setText('Importacion de datos realizada')
                 msg.exec()
 
-
         except Exception as error:
             print('Error en importar datos: ', error)
 
     def abrirExportar(self=None):
         try:
-            clientes = False
-            coches = False
-
             var.dlgexportar.show()
             if var.dlgexportar.exec():
-                #if var.dlgexportar.cbClientes.isChecked():
-                clientes = True
-                #if var.dlgexportar.cbCoches.isChecked():
-                coches = True
+                pass
 
-            Eventos.exportarDatos(clientes, coches)
         except Exception as error:
             print('Error en abrir exportar: ', error)
 
-    def exportarDatos(cli, co):
+    def exportarDatos(self):
         try:
-            clientes = cli
-            coches = co
+            clientes = var.dlgexportar.cbClientes.isChecked()
+            coches = var.dlgexportar.cbCoches.isChecked()
 
             fecha = datetime.today()
             fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')

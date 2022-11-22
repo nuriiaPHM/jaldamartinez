@@ -1,5 +1,6 @@
 from PyQt6 import QtWidgets, QtSql
 
+import clientes
 import conexion
 from ventMain import *
 import var
@@ -102,7 +103,6 @@ class Conexion():
 
     def altaExcelCoche(new):
         try:
-
             query1 = QtSql.QSqlQuery()
             query1.prepare('insert into coches(matricula, dnicli, marca, modelo, motor) '
                            'values (:matricula, :dnicli, :marca, :modelo, :motor)')
@@ -120,6 +120,28 @@ class Conexion():
 
         except Exception as error:
             print('Error en alta excel coche: ', error)
+
+    def altaExcelCli(new):
+        try:
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('insert into clientes(dni, nombre, alta, direccion, provincia, municipio, pago) '
+                           'values (:dni, :nombre, :alta, :direccion, :provincia, :municipio, :pago)')
+
+            query1.bindValue(':dni', str(new[0]))
+            query1.bindValue(':nombre', str(new[1]))
+            query1.bindValue(':alta', str(new[2]))
+            query1.bindValue(':direccion', str(new[3]))
+            query1.bindValue(':provincia', str(new[4]))
+            query1.bindValue(':municipio', str(new[5]))
+            query1.bindValue(':pago', str(new[6]))
+
+            if query1.exec():
+                pass
+
+            conexion.Conexion.mostrarTabCarCli(None)
+
+        except Exception as error:
+            print('Error en alta excel clientes: ', error)
 
     def mostrarTabCarCli(self=None):
         try:
@@ -142,7 +164,7 @@ class Conexion():
                     var.ui.tabClientes.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
                     if (index % 2) == 0:
-                        var.ui.tabClientes.setStyleSheet("QTableView::item { background-color: #d1c8c6; }")
+                        var.ui.tabClientes.setStyleSheet("QTableView::item { background-color: #ff0000; }")
                     else:
                         var.ui.tabClientes.setStyleSheet("QTableView::item { background-color: #f3eeed; }")
 

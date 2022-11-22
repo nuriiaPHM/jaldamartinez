@@ -2,6 +2,7 @@ from ventMain import *
 from dlgSalir import *
 from dlgCalendar import *
 from dlgExportar import *
+from dlgImportar import *
 from datetime import *
 import sys, var, events, clientes, conexion
 
@@ -31,6 +32,14 @@ class DialogExportar(QtWidgets.QDialog):
         super(DialogExportar, self).__init__()
         var.dlgexportar = Ui_dlgexportar()
         var.dlgexportar.setupUi(self)
+        var.dlgexportar.btnAceptar.clicked.connect(events.Eventos.exportarDatos)
+
+class DialogImportar(QtWidgets.QDialog):
+    def __init__(self):
+        super(DialogImportar, self).__init__()
+        var.dlgimportar = Ui_dlgimportar()
+        var.dlgimportar.setupUi(self)
+        var.dlgimportar.btnAceptar.clicked.connect(events.Eventos.importarDatos)
 
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
@@ -41,6 +50,7 @@ class Main(QtWidgets.QMainWindow):
         var.dlgcalendar = DialogCalendar()
         var.dlgabrir = FileDialogAbrir()
         var.dlgexportar = DialogExportar()
+        var.dlgimportar = DialogImportar()
 
         ''' Listado de eventos de menu '''
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
@@ -50,7 +60,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionCrear_copia_de_seguridadBar.triggered.connect(events.Eventos.creaBackup)
         var.ui.actionRestaurar_copia_de_seguridadBar.triggered.connect(events.Eventos.restauraBackup)
         var.ui.actionExportar_datos.triggered.connect(events.Eventos.abrirExportar)
-        var.ui.actionImportar_datos.triggered.connect(events.Eventos.importarDatos)
+        var.ui.actionImportar_datos.triggered.connect(events.Eventos.abrirImportar)
 
         ''' Listado de eventos de cajas '''
         var.ui.txtDni.editingFinished.connect(clientes.Clientes.mostraValidoDni)
