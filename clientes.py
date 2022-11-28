@@ -172,3 +172,50 @@ class Clientes():
 
         except Exception as error:
             print('Error al cargar cliente: ', error)
+
+    def borraCli(self):
+        try:
+            dni = var.ui.txtDni.text()
+            conexion.Conexion.borraCli(dni)
+            conexion.Conexion.mostrarTabCarCli(self)
+
+        except Exception as error:
+            print('Error en borra clientes: ',error)
+
+    def modifCli(self):
+        try:
+            modcli = []
+            modcar = []
+
+            cliente = [var.ui.txtDni, var.ui.txtNombre, var.ui.txtFechaAltaCli, var.ui.txtDircli]
+            for i in cliente:
+                modcli.append(i.text())
+
+            prov = var.ui.cmbProvCli.currentText()
+            modcli.append(prov)
+
+            muni = var.ui.cmbMuniCli.currentText()
+            modcli.append(muni)
+
+            pagos = []
+            if var.ui.chkEfectivo.isChecked():
+                pagos.append('Efectivo')
+            if var.ui.chkTarjeta.isChecked():
+                pagos.append('Tarjeta')
+            if var.ui.chkTransferencia.isChecked():
+                pagos.append('Transferencia')
+            pagos = set(pagos)
+            modcli.append('; '.join(pagos))
+
+            car = [var.ui.txtCar, var.ui.txtMarca, var.ui.txtModelo]
+            for i in car:
+                modcar.append(i.text())
+            motor = Clientes.checkMotor()
+            modcar.append(motor)
+
+            conexion.Conexion.modificaCli(modcli, modcar)
+
+            conexion.Conexion.mostrarTabCarCli()
+
+        except Exception as error:
+            print('Error al modificar cliente: ', error)

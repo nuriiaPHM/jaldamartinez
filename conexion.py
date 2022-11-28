@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from PyQt6 import QtWidgets, QtSql
 
 import clientes
@@ -147,7 +149,7 @@ class Conexion():
         try:
             index = 0
             query = QtSql.QSqlQuery()
-            query.prepare('select matricula, dnicli, marca, modelo, motor from coches order by marca, modelo')
+            query.prepare('select matricula, dnicli, marca, modelo, motor from coches where fechabajacar is null order by marca, modelo')
             if query.exec():
                 while query.next():
                     var.ui.tabClientes.setRowCount(index+1)
@@ -163,10 +165,7 @@ class Conexion():
                     var.ui.tabClientes.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                     var.ui.tabClientes.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
-                    if (index % 2) == 0:
-                        var.ui.tabClientes.setStyleSheet("QTableView::item { background-color: #ff0000; }")
-                    else:
-                        var.ui.tabClientes.setStyleSheet("QTableView::item { background-color: #f3eeed; }")
+                    var.ui.tabClientes.setStyleSheet("QTableView::item:alternate { background-color: #b5b5b5; } QTableView::item { background-color: #f3eeed; }")
 
                     index += 1
 
@@ -188,3 +187,106 @@ class Conexion():
 
         except Exception as error:
             print('Error en oneCli: ', error)
+
+    def borraCli(dni):
+        try:
+
+            fecha = datetime.today()
+            fecha = fecha.strftime('%d.%m.%Y.%H.%M.%S')
+
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('update clientes set fechabajacli = :fecha where dni = :dni')
+            query1.bindValue(':fecha', str(fecha))
+            query1.bindValue(':dni', str(dni))
+
+            if query1.exec():
+                pass
+
+            query = QtSql.QSqlQuery()
+            query.prepare('update coches set fechabajacar = :fecha where dnicli = :dni')
+            query.bindValue(':fecha', str(fecha))
+            query.bindValue(':dni', str(dni))
+
+
+            if query.exec():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                msg.setText('Cliente dado de baja')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+
+            '''
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('delete from coches where dnicli = :dni')
+            query1.bindValue(':dni', str(dni))
+
+            if query1.exec():
+                pass
+
+            query = QtSql.QSqlQuery()
+            query.prepare('delete from clientes where dni = :dni')
+            query.bindValue(':dni',str(dni))
+
+            if query.exec():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                msg.setText('Cliente dado de baja')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+            '''
+        except Exception as error:
+            print('Error en conexion borrar clientes: ', error)
+
+    def modificaCli(modcli, modcar):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('update clientes set nombre = :nombre, alta = :alta, direccion = :direccion, provincia = :provincia, municipio = :municipio, pago = :pago where dni = :dni')
+
+            query.bindValue(':dni', str(modcli[0]))
+            query.bindValue(':nombre', str(modcli[1]))
+            query.bindValue(':alta', str(modcli[2]))
+            query.bindValue(':direccion', str(modcli[3]))
+            query.bindValue(':provincia', str(modcli[4]))
+            query.bindValue(':municipio', str(modcli[5]))
+            query.bindValue(':pago', str(modcli[6]))
+
+            if query.exec():
+                pass
+
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('update coches set dnicli = :dnicli, marca = :marca, modelo = :modelo, motor = :motor where matricula = :matricula')
+
+            query1.bindValue(':matricula', str(modcar[0]))
+            query1.bindValue(':dnicli', str(modcli[0]))
+            query1.bindValue(':marca', str(modcar[1]))
+            query1.bindValue(':modelo', str(modcar[2]))
+            query1.bindValue(':motor', str(modcar[3]))
+
+            if query1.exec():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                msg.setText('Datos modificados correctamente')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+
+
+        except Exception as error:
+            print('Error en modificar clientes en conexion: ', error)

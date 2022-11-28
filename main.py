@@ -74,19 +74,20 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnGuardaCli.clicked.connect(clientes.Clientes.guardaCli)
         var.ui.btnFechaAltaCli.clicked.connect(events.Eventos.abrirCalendar)
         var.ui.btnLimpiarCli.clicked.connect(clientes.Clientes.limpiaCli)
+        var.ui.btnBorrarCli.clicked.connect(clientes.Clientes.borraCli)
+        var.ui.btnModifCli.clicked.connect(clientes.Clientes.modifCli)
 
-        '''Llamadas de funciones de conexion'''
+        ''' Llamadas de funciones de conexion '''
         conexion.Conexion.conexion()
         conexion.Conexion.mostrarTabCarCli(self)
         conexion.Conexion.cargarProv()
 
-        '''Llamadas de funciones de tablas'''
+        ''' Llamadas de funciones de tablas '''
         events.Eventos.resizeTabCarCli(self)
         var.ui.tabClientes.clicked.connect(clientes.Clientes.cargaCliente)
 
-        '''Llamadas a eventos de combo box'''
+        ''' Llamadas a eventos de combo box '''
         var.ui.cmbProvCli.currentIndexChanged.connect(conexion.Conexion.selMuni)
-
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
