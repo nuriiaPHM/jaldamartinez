@@ -941,12 +941,13 @@
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>img/calendar-icon.png</normaloff>img/calendar-icon.png</iconset>
+           <normaloff>img/calendar-icon.png</normaloff>
+           <normalon>img/calendar-icon.png</normalon>img/calendar-icon.png</iconset>
          </property>
          <property name="iconSize">
           <size>
-           <width>28</width>
-           <height>28</height>
+           <width>24</width>
+           <height>24</height>
           </size>
          </property>
         </widget>
@@ -1025,6 +1026,8 @@
     <addaction name="separator"/>
     <addaction name="actionExportar_datos"/>
     <addaction name="actionImportar_datos"/>
+    <addaction name="separator"/>
+    <addaction name="actionCambiar_propietario_del_coche"/>
    </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuHerramientas"/>
@@ -1040,6 +1043,8 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionCambiar_propietario_del_cocheBar"/>
+   <addaction name="separator"/>
    <addaction name="actionCrear_copia_de_seguridadBar"/>
    <addaction name="actionRestaurar_copia_de_seguridadBar"/>
    <addaction name="separator"/>
@@ -1128,6 +1133,24 @@
    </property>
    <property name="shortcut">
     <string>Alt+I</string>
+   </property>
+  </action>
+  <action name="actionCambiar_propietario_del_coche">
+   <property name="icon">
+    <iconset>
+     <normaloff>img/cambioprop_icon.png</normaloff>img/cambioprop_icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cambiar propietario del coche</string>
+   </property>
+  </action>
+  <action name="actionCambiar_propietario_del_cocheBar">
+   <property name="icon">
+    <iconset>
+     <normaloff>img/cambioprop_icon.png</normaloff>img/cambioprop_icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cambiar propietario del coche</string>
    </property>
   </action>
  </widget>
