@@ -33,6 +33,9 @@ class DialogExportar(QtWidgets.QDialog):
         var.dlgexportar = Ui_dlgexportar()
         var.dlgexportar.setupUi(self)
         var.dlgexportar.btnAceptar.clicked.connect(events.Eventos.exportarDatos)
+        var.dlgexportar.cbCoches
+        var.dlgexportar.cbClientes
+
 
 class DialogImportar(QtWidgets.QDialog):
     def __init__(self):
