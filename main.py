@@ -56,8 +56,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.actionSalirBar.triggered.connect(events.Eventos.Salir)
         var.ui.actionCrear_copia_de_seguridad.triggered.connect(events.Eventos.creaBackup)
-        var.ui.actionRestaurar_copia_de_seguridad.triggered.connect(events.Eventos.restauraBackup)
         var.ui.actionCrear_copia_de_seguridadBar.triggered.connect(events.Eventos.creaBackup)
+        var.ui.actionRestaurar_copia_de_seguridad.triggered.connect(events.Eventos.restauraBackup)
         var.ui.actionRestaurar_copia_de_seguridadBar.triggered.connect(events.Eventos.restauraBackup)
         var.ui.actionExportar_datos.triggered.connect(events.Eventos.abrirExportar)
         var.ui.actionImportar_datos.triggered.connect(events.Eventos.abrirImportar)
@@ -75,7 +75,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnFechaAltaCli.clicked.connect(events.Eventos.abrirCalendar)
         var.ui.btnLimpiarCli.clicked.connect(clientes.Clientes.limpiaCli)
         var.ui.btnBorrarCli.clicked.connect(clientes.Clientes.borraCli)
-        var.ui.btnModifCli.clicked.connect(clientes.Clientes.modifCli)
+        var.ui.btnModifCli.clicked.connect(clientes.Clientes.modifCli())
 
         ''' Llamadas de funciones de conexion '''
         conexion.Conexion.conexion()

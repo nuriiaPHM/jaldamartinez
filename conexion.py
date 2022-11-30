@@ -291,6 +291,28 @@ class Conexion():
         except Exception as error:
             print('Error en conexion borrar clientes: ', error)
 
+    def modificarDatos(modcli, modcar):
+        try:
+            registro = []
+
+            query = QtSql.QSqlQuery()
+            query.prepare('select dni from clientes where dni = :dni')
+
+            query.bindValue(':dni', str(modcli[0]))
+
+            if query.exec():
+                if query.next():
+                    registro.append(query.value(0))
+
+
+            # Comprobar si el dni existe. Si no existe crear al cliente con un coche vacio que tenga fecha de baja.
+
+
+            Conexion.modificaCli(modcli, modcar)
+
+        except Exception as error:
+            print('Error al modificar datos en eventos: ', error)
+
     def modificaCli(modcli, modcar):
         try:
             query = QtSql.QSqlQuery()
