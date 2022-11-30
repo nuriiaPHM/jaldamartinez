@@ -33,9 +33,6 @@ class DialogExportar(QtWidgets.QDialog):
         var.dlgexportar = Ui_dlgexportar()
         var.dlgexportar.setupUi(self)
         var.dlgexportar.btnAceptar.clicked.connect(events.Eventos.exportarDatos)
-        var.dlgexportar.cbCoches
-        var.dlgexportar.cbClientes
-
 
 class DialogImportar(QtWidgets.QDialog):
     def __init__(self):
@@ -88,6 +85,9 @@ class Main(QtWidgets.QMainWindow):
         ''' Llamadas de funciones de tablas '''
         events.Eventos.resizeTabCarCli(self)
         var.ui.tabClientes.clicked.connect(clientes.Clientes.cargaCliente)
+
+        ''' Llamadas a eventos de check box '''
+        var.ui.cbHistorico.clicked.connect(conexion.Conexion.mostrarTab)
 
         ''' Llamadas a eventos de combo box '''
         var.ui.cmbProvCli.currentIndexChanged.connect(conexion.Conexion.selMuni)

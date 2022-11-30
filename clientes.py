@@ -106,6 +106,10 @@ class Clientes():
             print(newcli)
             print(newcar)
 
+            var.ui.txtDni.setStyleSheet("background-color: rgb(255, 243, 181);")
+            var.ui.lblValidarDni.setText('')
+
+
         except Exception as error:
             print('Error en guardaCli: ', error)
 
@@ -131,6 +135,9 @@ class Clientes():
             for i in checks:
                 i.setChecked(False)
 
+
+            var.ui.txtDni.setStyleSheet("background-color: rgb(255, 243, 181);")
+            var.ui.lblValidarDni.setText('')
 
         except Exception as error:
             print('Error limpiar cliente: ', error)
@@ -177,7 +184,7 @@ class Clientes():
         try:
             dni = var.ui.txtDni.text()
             conexion.Conexion.borraCli(dni)
-            conexion.Conexion.mostrarTabCarCli(self)
+            conexion.Conexion.mostrarTab(self)
 
         except Exception as error:
             print('Error en borra clientes: ',error)
@@ -215,7 +222,7 @@ class Clientes():
 
             conexion.Conexion.modificaCli(modcli, modcar)
 
-            conexion.Conexion.mostrarTabCarCli()
+            conexion.Conexion.mostrarTab()
 
         except Exception as error:
             print('Error al modificar cliente: ', error)

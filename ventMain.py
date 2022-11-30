@@ -10,6 +10,9 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 
 
 class Ui_ventMain(object):
+    def __init__(self):
+        self.cbHistorico = None
+
     def setupUi(self, ventMain):
         ventMain.setObjectName("ventMain")
         ventMain.resize(800, 680)
@@ -159,7 +162,7 @@ class Ui_ventMain(object):
         self.tabClientes.setMaximumSize(QtCore.QSize(795, 280))
         self.tabClientes.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
         self.tabClientes.setObjectName("tabClientes")
-        self.tabClientes.setColumnCount(5)
+        self.tabClientes.setColumnCount(6)
         self.tabClientes.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tabClientes.setHorizontalHeaderItem(0, item)
@@ -171,6 +174,8 @@ class Ui_ventMain(object):
         self.tabClientes.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.tabClientes.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tabClientes.setHorizontalHeaderItem(5, item)
         self.layoutWidget_4 = QtWidgets.QWidget(self.tab1)
         self.layoutWidget_4.setGeometry(QtCore.QRect(140, 110, 432, 22))
         self.layoutWidget_4.setObjectName("layoutWidget_4")
@@ -348,6 +353,9 @@ class Ui_ventMain(object):
         self.btnBuscarCli.setIcon(icon2)
         self.btnBuscarCli.setIconSize(QtCore.QSize(20, 20))
         self.btnBuscarCli.setObjectName("btnBuscarCli")
+        self.cbHistorico = QtWidgets.QCheckBox(self.tab1)
+        self.cbHistorico.setGeometry(QtCore.QRect(640, 250, 111, 17))
+        self.cbHistorico.setObjectName("cbHistorico")
         self.tabWidget.addTab(self.tab1, "")
         self.tab2 = QtWidgets.QWidget()
         self.tab2.setObjectName("tab2")
@@ -461,6 +469,8 @@ class Ui_ventMain(object):
         item.setText(_translate("ventMain", "MODELO"))
         item = self.tabClientes.horizontalHeaderItem(4)
         item.setText(_translate("ventMain", "MOTOR"))
+        item = self.tabClientes.horizontalHeaderItem(5)
+        item.setText(_translate("ventMain", "FECHA BAJA"))
         self.label_2.setText(_translate("ventMain", "Forma de pago:"))
         self.chkTarjeta.setText(_translate("ventMain", "Contado Tarjeta"))
         self.chkEfectivo.setText(_translate("ventMain", "Contado Efectivo"))
@@ -471,6 +481,7 @@ class Ui_ventMain(object):
         self.lblDni.setText(_translate("ventMain", "DNI:"))
         self.lblNombre.setText(_translate("ventMain", "Nombre:"))
         self.lblFechaAltaCli.setText(_translate("ventMain", "Fecha Alta:"))
+        self.cbHistorico.setText(_translate("ventMain", "Mostrar historico"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab1), _translate("ventMain", "Clientes"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), _translate("ventMain", "Facturación"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab3), _translate("ventMain", "Servicios"))

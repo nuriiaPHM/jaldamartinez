@@ -40,7 +40,7 @@ class Eventos:
     def resizeTabCarCli(self):
         try:
             header = var.ui.tabClientes.horizontalHeader()
-            for i in range(5):
+            for i in range(6):
                 header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
                 if i == 0 or i == 1:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
@@ -85,7 +85,7 @@ class Eventos:
                 bbdd.close()
 
             conexion.Conexion.conexion()
-            conexion.Conexion.mostrarTabCarCli()
+            conexion.Conexion.mostrarTab()
 
             msg = QtWidgets.QMessageBox()
             msg.setModal(True)
@@ -134,7 +134,7 @@ class Eventos:
                             if var.dlgimportar.cbCoches.isChecked():
                                 conexion.Conexion.altaExcelCoche(new)
 
-                conexion.Conexion.mostrarTabCarCli()
+                conexion.Conexion.mostrarTab()
 
                 msg = QtWidgets.QMessageBox()
                 msg.setModal(True)

@@ -98,7 +98,7 @@ class Conexion():
                 msg.setText(query1.lastError().text())
                 msg.exec()
 
-            conexion.Conexion.mostrarTabCarCli(None)
+            conexion.Conexion.mostrarTab(None)
 
         except Exception as error:
             print('Error en alta cliente: ', error)
@@ -118,7 +118,7 @@ class Conexion():
             if query1.exec():
                 pass
 
-            conexion.Conexion.mostrarTabCarCli(None)
+            conexion.Conexion.mostrarTab(None)
 
         except Exception as error:
             print('Error en alta excel coche: ', error)
@@ -140,16 +140,25 @@ class Conexion():
             if query1.exec():
                 pass
 
-            conexion.Conexion.mostrarTabCarCli(None)
+            conexion.Conexion.mostrarTab(None)
 
         except Exception as error:
             print('Error en alta excel clientes: ', error)
+
+    def mostrarTab(self=None):
+        try:
+            if var.ui.cbHistorico.isChecked():
+                Conexion.mostrarTabCarCliBaja()
+            else:
+                Conexion.mostrarTabCarCli()
+        except Exception as error:
+            print('Error en mostrar tabla: ',error)
 
     def mostrarTabCarCli(self=None):
         try:
             index = 0
             query = QtSql.QSqlQuery()
-            query.prepare('select matricula, dnicli, marca, modelo, motor from coches where fechabajacar is null order by marca, modelo')
+            query.prepare('select matricula, dnicli, marca, modelo, motor, fechabajacar from coches where fechabajacar is null order by marca, modelo')
             if query.exec():
                 while query.next():
                     var.ui.tabClientes.setRowCount(index+1)
@@ -159,13 +168,46 @@ class Conexion():
                     var.ui.tabClientes.setItem(index, 2, QtWidgets.QTableWidgetItem(str(query.value(2))))
                     var.ui.tabClientes.setItem(index, 3, QtWidgets.QTableWidgetItem(str(query.value(3))))
                     var.ui.tabClientes.setItem(index, 4, QtWidgets.QTableWidgetItem(str(query.value(4))))
+                    var.ui.tabClientes.setItem(index, 5, QtWidgets.QTableWidgetItem(str(query.value(5))))
 
                     var.ui.tabClientes.item(index, 1).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                     var.ui.tabClientes.item(index, 2).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                     var.ui.tabClientes.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                     var.ui.tabClientes.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                    var.ui.tabClientes.item(index, 5).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
                     var.ui.tabClientes.setStyleSheet("QTableView::item:alternate { background-color: #b5b5b5; } QTableView::item { background-color: #f3eeed; }")
+
+                    index += 1
+
+        except Exception as error:
+            print('Error al mostrar tabla coches clientes: ', error)
+
+    def mostrarTabCarCliBaja(self=None):
+        try:
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare(
+                'select matricula, dnicli, marca, modelo, motor, fechabajacar from coches order by marca, modelo')
+            if query.exec():
+                while query.next():
+                    var.ui.tabClientes.setRowCount(index + 1)
+
+                    var.ui.tabClientes.setItem(index, 0, QtWidgets.QTableWidgetItem(str(query.value(1))))
+                    var.ui.tabClientes.setItem(index, 1, QtWidgets.QTableWidgetItem(str(query.value(0))))
+                    var.ui.tabClientes.setItem(index, 2, QtWidgets.QTableWidgetItem(str(query.value(2))))
+                    var.ui.tabClientes.setItem(index, 3, QtWidgets.QTableWidgetItem(str(query.value(3))))
+                    var.ui.tabClientes.setItem(index, 4, QtWidgets.QTableWidgetItem(str(query.value(4))))
+                    var.ui.tabClientes.setItem(index, 5, QtWidgets.QTableWidgetItem(str(query.value(5))))
+
+                    var.ui.tabClientes.item(index, 1).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                    var.ui.tabClientes.item(index, 2).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                    var.ui.tabClientes.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                    var.ui.tabClientes.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                    var.ui.tabClientes.item(index, 5).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+
+                    var.ui.tabClientes.setStyleSheet(
+                        "QTableView::item:alternate { background-color: #b5b5b5; } QTableView::item { background-color: #f3eeed; }")
 
                     index += 1
 
@@ -192,7 +234,7 @@ class Conexion():
         try:
 
             fecha = datetime.today()
-            fecha = fecha.strftime('%d.%m.%Y.%H.%M.%S')
+            fecha = fecha.strftime('%d/%m/%Y %H:%M:%S')
 
             query1 = QtSql.QSqlQuery()
             query1.prepare('update clientes set fechabajacli = :fecha where dni = :dni')
