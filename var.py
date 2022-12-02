@@ -10,3 +10,7 @@ global dlgabrir
 global dlgexportar
 global dlgimportar
 global bbdd
+global stateCarExportar
+global stateCliExportar
+global stateCarImportar
+global stateCliImportar

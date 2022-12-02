@@ -293,18 +293,32 @@ class Conexion():
 
     def modificarDatos(modcli, modcar):
         try:
-            registro = []
+            registroCli = []
+            registroCar = []
 
             query = QtSql.QSqlQuery()
-            query.prepare('select dni from clientes where dni = :dni')
+            query.prepare('select nombre from clientes where dni = :dni')
 
             query.bindValue(':dni', str(modcli[0]))
 
             if query.exec():
                 if query.next():
-                    registro.append(query.value(0))
+                    Conexion.modificaCli(modcli, modcar)
+                else:
+                    registroCli.append(str(modcli[0]))
+                    registroCli.append('')
+                    registroCli.append('')
+                    registroCli.append('')
+                    registroCli.append('')
+                    registroCli.append('')
+                    registroCli.append('')
 
+                    registroCar.append('')
+                    registroCar.append('')
+                    registroCar.append('')
+                    registroCar.append('')
 
+                    Conexion.altaCli(registroCli, registroCar)
             # Comprobar si el dni existe. Si no existe crear al cliente con un coche vacio que tenga fecha de baja.
 
 

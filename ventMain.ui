@@ -484,6 +484,11 @@
         <string>MOTOR</string>
        </property>
       </column>
+      <column>
+       <property name="text">
+        <string>FECHA BAJA</string>
+       </property>
+      </column>
      </widget>
      <widget class="QWidget" name="layoutWidget_4">
       <property name="geometry">
@@ -987,6 +992,19 @@
         <width>20</width>
         <height>20</height>
        </size>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="cbHistorico">
+      <property name="geometry">
+       <rect>
+        <x>640</x>
+        <y>250</y>
+        <width>111</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Mostrar historico</string>
       </property>
      </widget>
     </widget>

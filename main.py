@@ -34,12 +34,39 @@ class DialogExportar(QtWidgets.QDialog):
         var.dlgexportar.setupUi(self)
         var.dlgexportar.btnAceptar.clicked.connect(events.Eventos.exportarDatos)
 
+        '''SOLUCION'''
+        var.stateCarExportar = 0
+        var.stateCliExportar = 0
+        var.dlgexportar.cbClientes.stateChanged.connect(lambda state, chkcli=var.dlgexportar.cbClientes: self.updatecli(state, chkcli))
+        var.dlgexportar.cbCoches.stateChanged.connect(lambda state, chkcar=var.dlgexportar.cbCoches: self.updatecar(state, chkcar))
+
+    def updatecli(self, state, chk):
+        var.stateCliExportar = state
+
+    def updatecar(self, state, chk):
+        var.stateCarExportar = state
+
+
+
 class DialogImportar(QtWidgets.QDialog):
     def __init__(self):
         super(DialogImportar, self).__init__()
         var.dlgimportar = Ui_dlgimportar()
         var.dlgimportar.setupUi(self)
         var.dlgimportar.btnAceptar.clicked.connect(events.Eventos.importarDatos)
+
+        '''SOLUCION'''
+        var.stateCarImportar = 0
+        var.stateCliImportar = 0
+        var.dlgimportar.cbClientes.stateChanged.connect(lambda state, chkcli=var.dlgimportar.cbClientes: self.updatecli(state, chkcli))
+        var.dlgimportar.cbCoches.stateChanged.connect(lambda state, chkcar=var.dlgimportar.cbCoches: self.updatecar(state, chkcar))
+
+    def updatecli(self, state, chk):
+        var.stateCliImportar = state
+
+    def updatecar(self, state, chk):
+        var.stateCarImportar = state
+
 
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
@@ -75,7 +102,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnFechaAltaCli.clicked.connect(events.Eventos.abrirCalendar)
         var.ui.btnLimpiarCli.clicked.connect(clientes.Clientes.limpiaCli)
         var.ui.btnBorrarCli.clicked.connect(clientes.Clientes.borraCli)
-        var.ui.btnModifCli.clicked.connect(clientes.Clientes.modifCli())
+        var.ui.btnModifCli.clicked.connect(clientes.Clientes.modifCli)
 
         ''' Llamadas de funciones de conexion '''
         conexion.Conexion.conexion()

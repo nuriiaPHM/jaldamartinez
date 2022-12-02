@@ -189,7 +189,7 @@ class Clientes():
         except Exception as error:
             print('Error en borra clientes: ',error)
 
-    def modifCli(self):
+    def modifCli(self=None):
         try:
             modcli = []
             modcar = []

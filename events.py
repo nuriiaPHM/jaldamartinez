@@ -127,11 +127,11 @@ class Eventos:
                         for j in range(columnas):
                             new.append(str(datos.cell_value(i, j)))
                         if clientes.Clientes.validarDni(str(new[0])):
-                            if var.dlgimportar.cbClientes.isChecked():
+                            if var.stateCliImportar == 2:
                                 conexion.Conexion.altaExcelCli(new)
 
                         if clientes.Clientes.validarDni(str(new[1])):
-                            if var.dlgimportar.cbCoches.isChecked():
+                            if var.stateCarImportar == 2:
                                 conexion.Conexion.altaExcelCoche(new)
 
                 conexion.Conexion.mostrarTab()
@@ -157,26 +157,32 @@ class Eventos:
 
     def exportarDatos(self):
         try:
-            if var.dlgexportar.cbClientes.isChecked():
-                Eventos.exportarClientes()
-            if var.dlgexportar.cbCoches.isChecked():
-                Eventos.exportarCoches()
-
-        except Exception as error:
-            print('Error al exportar datos: ', error)
-
-    def exportarClientes(self):
-        try:
             fecha = datetime.today()
             fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
 
             file = str(fecha)
-            file += '_Clientes'
-            file += '.xls'
 
-            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Guardar datos de clientes', file, '.xls')
+            if var.stateCliExportar == 2 & var.stateCarExportar == 2:
+                file += '_Clientes_Coches.xls'
+                directorio, filename = var.dlgabrir.getSaveFileName(None, 'Guardar datos de clientes', file, '.xls')
+                wb = xlwt.Workbook()
+                Eventos.exportarClientesCoches(wb, directorio)
+            elif var.stateCliExportar == 2:
+                file += '_Clientes.xls'
+                directorio, filename = var.dlgabrir.getSaveFileName(None, 'Guardar datos de clientes', file, '.xls')
+                wb = xlwt.Workbook()
+                Eventos.exportarClientes(wb, directorio)
+            elif var.stateCarExportar == 2:
+                file += '_Coches.xls'
+                directorio, filename = var.dlgabrir.getSaveFileName(None, 'Guardar datos de clientes', file, '.xls')
+                wb = xlwt.Workbook()
+                Eventos.exportarCoches(wb, directorio)
 
-            wb = xlwt.Workbook()
+        except Exception as error:
+            print('Error al exportar datos: ', error)
+
+    def exportarClientes(wb, directorio):
+        try:
 
             sheet1 = wb.add_sheet('Clientes')
             sheet1.write(0, 0, 'DNI')
@@ -216,18 +222,8 @@ class Eventos:
             print('Error al exportar datos de clientes: ', error)
 
 
-    def exportarCoches(self):
+    def exportarCoches(wb, directorio):
         try:
-            fecha = datetime.today()
-            fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
-
-            file = str(fecha)
-            file += '_Coches'
-            file += '.xls'
-
-            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Guardar datos de coches', file, '.xls')
-
-            wb = xlwt.Workbook()
 
             sheet1 = wb.add_sheet('Coches')
             sheet1.write(0, 0, 'Matricula')
@@ -243,9 +239,9 @@ class Eventos:
                 fila = 1
                 while queryCo.next():
                     sheet1.write(fila, 0, str(queryCo.value(0)))
-                    sheet1.write(fila, 1, str(queryCo.value(1)))
-                    sheet1.write(fila, 2, str(queryCo.value(2)))
-                    sheet1.write(fila, 3, str(queryCo.value(3)))
+                    sheet1.write(fila, 1, str(queryCo.value(2)))
+                    sheet1.write(fila, 2, str(queryCo.value(3)))
+                    sheet1.write(fila, 3, str(queryCo.value(4)))
 
                     fila += 1
 
@@ -259,4 +255,62 @@ class Eventos:
             msg.exec()
 
         except Exception as error:
-            print('Error al exportar datos: ', error)
+            print('Error al exportar datos de coches: ', error)
+
+    def exportarClientesCoches(wb, directorio):
+        try:
+            sheet1 = wb.add_sheet('Clientes')
+            sheet1.write(0, 0, 'DNI')
+            sheet1.write(0, 1, 'Nombre')
+            sheet1.write(0, 2, 'Fecha Alta')
+            sheet1.write(0, 3, 'Direccion')
+            sheet1.write(0, 4, 'Provincia')
+            sheet1.write(0, 5, 'Municipio')
+            sheet1.write(0, 6, 'Forma de pago')
+
+            queryCli = QtSql.QSqlQuery()
+            queryCli.prepare('select * from clientes order by dni')
+
+            if (queryCli.exec()):
+                fila = 1
+                while queryCli.next():
+                    sheet1.write(fila, 0, str(queryCli.value(0)))
+                    sheet1.write(fila, 1, str(queryCli.value(1)))
+                    sheet1.write(fila, 2, str(queryCli.value(2)))
+                    sheet1.write(fila, 3, str(queryCli.value(3)))
+                    sheet1.write(fila, 4, str(queryCli.value(4)))
+                    sheet1.write(fila, 5, str(queryCli.value(5)))
+                    sheet1.write(fila, 6, str(queryCli.value(6)))
+
+                    fila += 1
+
+            sheet2 = wb.add_sheet('Coches')
+            sheet2.write(0, 0, 'Matricula')
+            sheet2.write(0, 1, 'Marca')
+            sheet2.write(0, 2, 'Modelo')
+            sheet2.write(0, 3, 'Motor')
+
+            queryCo = QtSql.QSqlQuery()
+            queryCo.prepare('select * from coches order by matricula')
+
+            if (queryCo.exec()):
+                fila = 1
+                while queryCo.next():
+                    sheet2.write(fila, 0, str(queryCo.value(0)))
+                    sheet2.write(fila, 1, str(queryCo.value(2)))
+                    sheet2.write(fila, 2, str(queryCo.value(3)))
+                    sheet2.write(fila, 3, str(queryCo.value(4)))
+
+                    fila += 1
+
+            wb.save(directorio)
+
+            msg = QtWidgets.QMessageBox()
+            msg.setModal(True)
+            msg.setWindowTitle('Aviso')
+            msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+            msg.setText('Datos de clientes exportados correctamente')
+            msg.exec()
+
+        except Exception as error:
+            print('error al exportar datos de coches y clientes: ', error)
