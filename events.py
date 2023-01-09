@@ -34,6 +34,10 @@ class Eventos:
             var.ui.txtMarca.setText(var.ui.txtMarca.text().upper())
             var.ui.txtModelo.setText(var.ui.txtModelo.text().title())
 
+            var.ui.txtConcepto.setText(var.ui.txtConcepto.text().title())
+            var.ui.txtPrecio.setText(var.ui.txtPrecio.text().title())
+            var.ui.txtBuscarServicio.setText(var.ui.txtBuscarServicio.text().title())
+
         except Exception as error:
             print('Error en letras capital: ', error)
 
@@ -44,6 +48,16 @@ class Eventos:
                 header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
                 if i == 0 or i == 1:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
+
+        except Exception as error:
+            print('Error en resize')
+
+    def resizeTabServicios(self):
+        try:
+            header = var.ui.tabServicios.horizontalHeader()
+            for i in range(3):
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
+
 
         except Exception as error:
             print('Error en resize')
@@ -314,3 +328,47 @@ class Eventos:
 
         except Exception as error:
             print('error al exportar datos de coches y clientes: ', error)
+
+
+
+
+    def exportarServicios(self=None):
+        try:
+            fecha = datetime.today()
+            fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
+
+            file = str(fecha)
+            file += '_Servicios.xls'
+            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Guardar servicios', file, '.xls')
+            wb = xlwt.Workbook()
+
+
+            sheet1 = wb.add_sheet('Servicios')
+            sheet1.write(0, 0, 'Codigo')
+            sheet1.write(0, 1, 'Concepto')
+            sheet1.write(0, 2, 'Precio_Unidad')
+
+            query = QtSql.QSqlQuery()
+            query.prepare('select * from servicios')
+
+            if (query.exec()):
+                fila = 1
+                while query.next():
+                    sheet1.write(fila, 0, str(query.value(0)))
+                    sheet1.write(fila, 1, str(query.value(1)))
+                    sheet1.write(fila, 2, str(query.value(2)))
+
+                    fila += 1
+
+            wb.save(directorio)
+
+            msg = QtWidgets.QMessageBox()
+            msg.setModal(True)
+            msg.setWindowTitle('Aviso')
+            msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+            msg.setText('Datos de servicios exportados correctamente')
+            msg.exec()
+
+
+        except Exception as error:
+            print('Error en Eventos.exportarServicios: ', error)

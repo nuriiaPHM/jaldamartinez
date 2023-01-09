@@ -158,7 +158,7 @@ class Conexion():
         try:
             index = 0
             query = QtSql.QSqlQuery()
-            query.prepare('select matricula, dnicli, marca, modelo, motor, fechabajacar from coches where fechabajacar is null order by marca, modelo')
+            query.prepare('select matricula, dnicli, marca, modelo, motor, fechabajacar from coches where fechabajacar is null and matricula != "" order by marca, modelo')
             if query.exec():
                 while query.next():
                     var.ui.tabClientes.setRowCount(index+1)
@@ -188,7 +188,7 @@ class Conexion():
             index = 0
             query = QtSql.QSqlQuery()
             query.prepare(
-                'select matricula, dnicli, marca, modelo, motor, fechabajacar from coches order by marca, modelo')
+                'select matricula, dnicli, marca, modelo, motor, fechabajacar from coches where matricula != "" order by marca, modelo')
             if query.exec():
                 while query.next():
                     var.ui.tabClientes.setRowCount(index + 1)
@@ -206,9 +206,7 @@ class Conexion():
                     var.ui.tabClientes.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                     var.ui.tabClientes.item(index, 5).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
-                    var.ui.tabClientes.setStyleSheet(
-                        "QTableView::item:alternate { background-color: #b5b5b5; } QTableView::item { background-color: #f3eeed; }")
-
+                    '''var.ui.tabClientes.setStyleSheet(QTableView::item:alternate { background-color: #b5b5b5; } QTableView::item { background-color: #f3eeee; }")'''
                     index += 1
 
         except Exception as error:
@@ -365,6 +363,141 @@ class Conexion():
                 msg.setText(query.lastError().text())
                 msg.exec()
 
-
         except Exception as error:
             print('Error en modificar clientes en conexion: ', error)
+
+
+
+
+
+    '''SERVICIOS'''
+
+    def altaServicio(newServicio):
+        try:
+            query = QtSql.QSqlQuery()
+
+            query.prepare('insert into servicios (concepto, precio_unidad) values (:concepto, :precio)')
+
+            query.bindValue(':concepto', str(newServicio[0]))
+            query.bindValue(':precio', str(newServicio[1]))
+
+            if query.exec():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                msg.setText('Servicio dado de alta')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+
+            conexion.Conexion.mostrarTabServicios()
+
+        except Exception as error:
+            print('Error en Conexion.altaServicio: ', error)
+
+    def mostrarTabServicios(self=None):
+        try:
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo, concepto, precio_unidad from servicios')
+            if query.exec():
+                while query.next():
+                    var.ui.tabServicios.setRowCount(index + 1)
+
+                    var.ui.tabServicios.setItem(index, 0, QtWidgets.QTableWidgetItem(str(query.value(0))))
+                    var.ui.tabServicios.setItem(index, 1, QtWidgets.QTableWidgetItem(str(query.value(1))))
+                    var.ui.tabServicios.setItem(index, 2, QtWidgets.QTableWidgetItem(str(query.value(2))))
+
+
+                    var.ui.tabClientes.setStyleSheet("QTableView::item:alternate { background-color: #b5b5b5; } QTableView::item { background-color: #f3eeee; }")
+
+                    index += 1
+        except Exception as error:
+            print('Error en Conexion.mostrarTabServicios: ', error)
+
+    def selectServicio(codigo):
+        try:
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select concepto, precio_unidad from servicios where codigo = :codigo')
+
+            query.bindValue(':codigo', str(codigo))
+            if query.exec():
+                while query.next():
+                    for i in range(3):
+                        registro.append(query.value(i))
+            return registro
+
+        except Exception as error:
+            print('Error en Conexion.selectServicio: ', error)
+
+
+    def borrarServicio(codigo):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('delete from servicios where codigo = :codigo')
+            query.bindValue(':codigo', str(codigo))
+
+            if query.exec():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                msg.setText('Servicio dado de baja')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+
+        except Exception as error:
+            print('Error en Conexion.borrarServicio: ', error)
+
+
+    def modificarServicio(modServicio):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('update servicios set concepto = :concepto, precio_unidad = :precio where codigo = :codigo')
+
+            query.bindValue(':codigo', str(modServicio[0]))
+            query.bindValue(':concepto', str(modServicio[1]))
+            query.bindValue(':precio', str(modServicio[2]))
+
+            if query.exec():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                msg.setText('Servicio modificado correctamente')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+
+        except Exception as error:
+            print('Error en Conexion.modificarServivio: ', error)
+
+    def buscarServicio(nombre):
+        try:
+            resultado = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo, concepto, precio_unidad from servicios where concepto = :nombre')
+
+            query.bindValue(':nombre', nombre)
+
+            if query.exec():
+                while query.next():
+                    for i in range(3):
+                        resultado.append(query.value(i))
+
+            return resultado
+
+        except Exception as error:
+                print('Error en Conexion.buscarServicio: ', error)

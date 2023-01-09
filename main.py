@@ -1,10 +1,11 @@
+import servicios
 from ventMain import *
 from dlgSalir import *
 from dlgCalendar import *
 from dlgExportar import *
 from dlgImportar import *
 from datetime import *
-import sys, var, events, clientes, conexion
+import sys, var, events, clientes, conexion, informes
 
 class FileDialogAbrir(QtWidgets.QFileDialog):
     def __init__(self):
@@ -79,6 +80,26 @@ class Main(QtWidgets.QMainWindow):
         var.dlgexportar = DialogExportar()
         var.dlgimportar = DialogImportar()
 
+        ''' FUNCIONES SERVICIOS '''
+        var.ui.btnGuardaServicio.clicked.connect(servicios.Servicios.guardarServicio)
+        var.ui.btnBorrarServicio.clicked.connect(servicios.Servicios.borrarServicio)
+        var.ui.btnModificaServicio.clicked.connect(servicios.Servicios.modificarServicio)
+        var.ui.btnBuscarServicio.clicked.connect(servicios.Servicios.buscarServicio)
+
+        events.Eventos.resizeTabServicios(self)
+        var.ui.tabServicios.clicked.connect(servicios.Servicios.cargaServicio)
+
+        var.ui.txtConcepto.editingFinished.connect(events.Eventos.letrasCapital)
+        var.ui.txtPrecio.editingFinished.connect(events.Eventos.letrasCapital)
+        var.ui.txtBuscarServicio.editingFinished.connect(events.Eventos.letrasCapital)
+
+        conexion.Conexion.conexion()
+        conexion.Conexion.mostrarTabServicios()
+
+        var.ui.actionExportar_servicios.triggered.connect(events.Eventos.exportarServicios)
+
+
+
         ''' Listado de eventos de menu '''
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.actionSalirBar.triggered.connect(events.Eventos.Salir)
@@ -88,6 +109,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionRestaurar_copia_de_seguridadBar.triggered.connect(events.Eventos.restauraBackup)
         var.ui.actionExportar_datos.triggered.connect(events.Eventos.abrirExportar)
         var.ui.actionImportar_datos.triggered.connect(events.Eventos.abrirImportar)
+
+        var.ui.actionInformes_Clientes.triggered.connect(informes.Informes.listClientes)
+        var.ui.actionInformes_Vehiculos.triggered.connect(informes.Informes.listCoches)
 
         ''' Listado de eventos de cajas '''
         var.ui.txtDni.editingFinished.connect(clientes.Clientes.mostraValidoDni)

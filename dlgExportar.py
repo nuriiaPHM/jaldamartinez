@@ -10,10 +10,6 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 
 
 class Ui_dlgexportar(object):
-    def __init__(self):
-        self.cbCoches = None
-        self.cbClientes = None
-
     def setupUi(self, dlgexportar):
         dlgexportar.setObjectName("dlgexportar")
         dlgexportar.resize(275, 151)

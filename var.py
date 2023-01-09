@@ -14,3 +14,4 @@ global stateCarExportar
 global stateCliExportar
 global stateCarImportar
 global stateCliImportar
+global report

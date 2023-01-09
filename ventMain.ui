@@ -31,7 +31,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>801</width>
+      <width>1058</width>
       <height>600</height>
      </rect>
     </property>
@@ -455,6 +455,15 @@
         <width>795</width>
         <height>280</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
       </property>
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
@@ -1017,6 +1026,276 @@
      <attribute name="title">
       <string>Servicios</string>
      </attribute>
+     <widget class="QTableWidget" name="tabServicios">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>200</y>
+        <width>781</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>111111</width>
+        <height>111111</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <column>
+       <property name="text">
+        <string>CODIGO</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>CONCEPTO</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>PRECIO-UNIDAD</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QLabel" name="lblTituloCli_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>10</y>
+        <width>120</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>120</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>120</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>MS Shell Dlg 2</family>
+        <pointsize>8</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 190, 255, 255), stop:1 rgba(255, 255, 255, 255));</string>
+      </property>
+      <property name="text">
+       <string>XESTIÓN SERVICIOS</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="Line" name="line_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>130</y>
+        <width>795</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>795</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>795</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="lineWidth">
+       <number>3</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>100</y>
+        <width>239</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <widget class="QPushButton" name="btnGuardaServicio">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Guardar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnModificaServicio">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Modificar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnBorrarServicio">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Eliminar</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>60</y>
+        <width>587</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <item>
+        <widget class="QLabel" name="lblCodigo">
+         <property name="text">
+          <string>Codigo:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtCodigo">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblConcepto">
+         <property name="text">
+          <string>Concepto:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtConcepto"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblPrecio">
+         <property name="text">
+          <string>Precio-unidad:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtPrecio"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>160</y>
+        <width>439</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <item>
+        <widget class="QLabel" name="lblConcepto_2">
+         <property name="text">
+          <string>Concepto:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtBuscarServicio">
+         <property name="minimumSize">
+          <size>
+           <width>300</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnBuscarServicio">
+         <property name="text">
+          <string>Buscar</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -1045,10 +1324,24 @@
     <addaction name="actionExportar_datos"/>
     <addaction name="actionImportar_datos"/>
     <addaction name="separator"/>
-    <addaction name="actionCambiar_propietario_del_coche"/>
+    <addaction name="actionExportar_servicios"/>
+   </widget>
+   <widget class="QMenu" name="menuInformes">
+    <property name="title">
+     <string>Informes</string>
+    </property>
+    <addaction name="actionInformes_Clientes"/>
+    <addaction name="actionInformes_Vehiculos"/>
+   </widget>
+   <widget class="QMenu" name="menuAcerca_de">
+    <property name="title">
+     <string>Acerca de</string>
+    </property>
    </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuHerramientas"/>
+   <addaction name="menuInformes"/>
+   <addaction name="menuAcerca_de"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -1061,8 +1354,6 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionCambiar_propietario_del_cocheBar"/>
-   <addaction name="separator"/>
    <addaction name="actionCrear_copia_de_seguridadBar"/>
    <addaction name="actionRestaurar_copia_de_seguridadBar"/>
    <addaction name="separator"/>
@@ -1084,7 +1375,7 @@
    <property name="icon">
     <iconset>
      <normaloff>img/salir_icon.png</normaloff>
-     <normalon>C:/Users/a21nuriajm/.designer/backup/img/salir_icon.png</normalon>img/salir_icon.png</iconset>
+     <normalon>../../.designer/backup/img/salir_icon.png</normalon>img/salir_icon.png</iconset>
    </property>
    <property name="text">
     <string>Salir</string>
@@ -1106,7 +1397,7 @@
    <property name="icon">
     <iconset>
      <normaloff>img/crearbd-icon.png</normaloff>
-     <normalon>C:/Users/a21nuriajm/.designer/backup/img/crearbd-icon.png</normalon>img/crearbd-icon.png</iconset>
+     <normalon>../../.designer/backup/img/crearbd-icon.png</normalon>img/crearbd-icon.png</iconset>
    </property>
    <property name="text">
     <string>Crear copia de seguridad</string>
@@ -1119,7 +1410,7 @@
    <property name="icon">
     <iconset>
      <normaloff>img/restaurabd-icon.png</normaloff>
-     <normalon>C:/Users/a21nuriajm/.designer/backup/img/restaurabd-icon.png</normalon>img/restaurabd-icon.png</iconset>
+     <normalon>../../.designer/backup/img/restaurabd-icon.png</normalon>img/restaurabd-icon.png</iconset>
    </property>
    <property name="text">
     <string>Restaurar copia de seguridad</string>
@@ -1153,22 +1444,19 @@
     <string>Alt+I</string>
    </property>
   </action>
-  <action name="actionCambiar_propietario_del_coche">
-   <property name="icon">
-    <iconset>
-     <normaloff>img/cambioprop_icon.png</normaloff>img/cambioprop_icon.png</iconset>
-   </property>
+  <action name="actionExportar_servicios">
    <property name="text">
-    <string>Cambiar propietario del coche</string>
+    <string>Exportar servicios</string>
    </property>
   </action>
-  <action name="actionCambiar_propietario_del_cocheBar">
-   <property name="icon">
-    <iconset>
-     <normaloff>img/cambioprop_icon.png</normaloff>img/cambioprop_icon.png</iconset>
-   </property>
+  <action name="actionInformes_Clientes">
    <property name="text">
-    <string>Cambiar propietario del coche</string>
+    <string>Informes Clientes</string>
+   </property>
+  </action>
+  <action name="actionInformes_Vehiculos">
+   <property name="text">
+    <string>Informes Vehículos</string>
    </property>
   </action>
  </widget>
